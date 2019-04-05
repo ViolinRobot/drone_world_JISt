@@ -139,4 +139,3 @@ public class Place implements Comparable<Place>{
 	}
 	
 }
-

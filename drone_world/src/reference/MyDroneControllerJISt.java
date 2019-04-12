@@ -1,7 +1,7 @@
 /**
  * Authored by: Josiah Swanson & Isaac Siebelink - JISt
- * Drone World Part 1
- * Last edit: 4/5/19
+ * Drone World Part 2
+ * Last edit: 4/12/19
  */
 
 package reference;
@@ -11,23 +11,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.TreeSet;
 
+import simulator.DistanceCalculator;
 import simulator.Drone;
 import simulator.Person;
 import simulator.Place;
 
-/**
- * This is the class that students should work with to create their drone controller
- * Rename this class to MyDroneControllerXXXXXXX where XXXXXX is the team name
- * 
- */
 public class MyDroneControllerJISt extends DroneControllerSkeleton 
 {	
-	//@Override
-	//public String getNextDroneName() 
-	//{
-	//	return "JISt Drone #"+incrementDroneCounter();
-	//}
-	
 	@Override
 	public String getCompanyName() 
 	{
@@ -58,8 +48,22 @@ public class MyDroneControllerJISt extends DroneControllerSkeleton
 				max = listOfPlaces.get(i);
 		}
 		
+		// Not implemented this installation. Maybe for the final installation... 		
+		// Get places in order of distance from idling spot
+		ArrayList<Place> listOfNearby = new ArrayList<Place>();
+		for (int j = 1; j < listOfPlaces.size(); j++) {
+			Place closestPlace = listOfPlaces.get(0);
+			for (int i = j; i > 0; i--) 
+			{
+				if (DistanceCalculator.distance(x.getPosition().getLatitude(), x.getPosition().getLongitude(), listOfPlaces.get(i).getPosition().getLatitude(), listOfPlaces.get(i).getPosition().getLongitude()) <
+						DistanceCalculator.distance(x.getPosition().getLatitude(), x.getPosition().getLongitude(), closestPlace.getPosition().getLatitude(), closestPlace.getPosition().getLongitude()))
+					closestPlace = listOfPlaces.get(i);
+			}
+			listOfNearby.add(closestPlace);
+		}
 		
-		String nextPlace = "";
+		
+		String nextPlace = "";		
 		
 		/*
 		If there is a person at current location:

@@ -18,14 +18,8 @@ import simulator.Drone;
 import simulator.Person;
 import simulator.Place;
 
-/**
- * This is the class that students should work with to create their drone controller
- * Rename this class to MyDroneControllerXXXXXXX where XXXXXX is the team name
- * 
- */
-public class MyDroneControllerJISt extends DroneControllerSkeleton {
-	
-	
+public class MyDroneControllerJISt extends DroneControllerSkeleton 
+{	
 	//@Override
 		//public String getNextDroneName() 
 		//{
@@ -44,8 +38,7 @@ public class MyDroneControllerJISt extends DroneControllerSkeleton {
 		
 		@Override
 		public void droneIdling(Drone drone) 
-		{	
-			
+		{				
 			// Notify the parent class of the current event
 			super.droneIdling(drone);
 
@@ -143,7 +136,5 @@ public class MyDroneControllerJISt extends DroneControllerSkeleton {
 				getSimulator().routeDrone(drone, max);
 
 			getSimulator().routeDrone(drone, nextPlace);
-
 		}
-
 }

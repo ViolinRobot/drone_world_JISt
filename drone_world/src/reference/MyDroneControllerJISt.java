@@ -35,7 +35,6 @@ public class MyDroneControllerJISt extends DroneControllerSkeleton
 
 	// Add getters during Drone transit over-ride
 	// But, do all calculations while idling...
-	// 
 	
 	@Override
 	public void droneIdling(Drone drone) 
@@ -112,10 +111,9 @@ public class MyDroneControllerJISt extends DroneControllerSkeleton
 		getSimulator().setDroneManifest(drone, nextPlace);
 
 		// Send the drone to a new location
-		if (listOfPeople.size() > 7) {
+		if (listOfPeople.size() > 7)
 			getSimulator().routeDrone(drone, listOfNearbyPlaces.get(r - 1));
-		}
-		
-		else getSimulator().routeDrone(drone, routePlace);
+		else 
+			getSimulator().routeDrone(drone, routePlace);
 	}
 }

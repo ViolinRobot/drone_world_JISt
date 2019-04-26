@@ -7,12 +7,8 @@
 package reference;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -20,7 +16,7 @@ import simulator.DistanceCalculator;
 import simulator.Drone;
 import simulator.Person;
 import simulator.Place;
-import simulator.interfaces.SimulationController;
+//import simulator.interfaces.SimulationController;
 
 public class MyDroneControllerJISt extends DroneControllerSkeleton 
 {
@@ -30,7 +26,6 @@ public class MyDroneControllerJISt extends DroneControllerSkeleton
 	// return "JISt Drone #"+incrementDroneCounter();
 	// }
 
-	private LinkedList<String> route = new LinkedList<String>();
 	private LinkedList<String> passPlaces = new LinkedList<String>();
 
 	@Override
@@ -133,32 +128,6 @@ public class MyDroneControllerJISt extends DroneControllerSkeleton
 		String routePlace = listOfNearbyPlaces.get((int)(Math.random() * listOfNearbyPlaces.size() + 1)).getName();
 
 		passPlaces.retainAll(nearbyPlaceString);
-		
-		/*
-		String theDestination = "";
-		if (listOfPeople.size() > 0)
-		{
-			Map<String, Integer> whereTheyGo = new HashMap<String, Integer>();
-			for (Person passenger : listOfPeople)
-			{
-				if (whereTheyGo.get(passenger.getDestination()) == null)
-					whereTheyGo.put(passenger.getDestination(),  1);
-				else
-					whereTheyGo.put(passenger.getDestination(), whereTheyGo.get(passenger.getDestination()) + 1);
-			}
-			
-			int theMostVotes = -1;
-			
-			for (String key : whereTheyGo.keySet())
-			{
-				if (whereTheyGo.get(key) < theMostVotes)
-				{
-					theDestination = key;
-					theMostVotes = whereTheyGo.get(key);
-				}
-			}
-		}
-		*/
 
 		if (passPlaces.size() < 1)
 			getSimulator().routeDrone(drone, routePlace);
@@ -168,6 +137,7 @@ public class MyDroneControllerJISt extends DroneControllerSkeleton
 		getSimulator().setDroneManifest(drone, waitingDestList);
 	}
 
+	/*
 	private ArrayList<String> routeTo(Drone drone, Place start, Place sink, ArrayList<String> route) 
 	{
 		ArrayList<Place> nextJump = getInRangePlaces(drone, start);
@@ -189,25 +159,16 @@ public class MyDroneControllerJISt extends DroneControllerSkeleton
 
 		return null;
 	}
+	*/
 
-	private String goGetSomePassengersForCryingOutLoud(Drone drone, Place currentLocation)
-	{
-		// Get in-range places
-		ArrayList<Place> inRangePlaces = new ArrayList<Place>();
-		inRangePlaces.addAll(getInRangePlaces(drone, currentLocation));
-
-		// Return an arbitrary location to go get passengers from
-		Random r = getSimulator().getSimulationController().getRandom();
-		Integer nextRandom = r.nextInt(inRangePlaces.size());
-		return inRangePlaces.get(nextRandom).getName();
-	}
-
+	/*
 	private TreeSet<Place> getAllPossiblePlaces(Place currentLocation)
 	{
 		TreeSet<Place> places = getSimulator().getPlaces();
 		places.remove(currentLocation);
 		return places;
 	}
+	*/
 
 	private Boolean isInRange(Drone drone, Place start, Place sink)
 	{
@@ -224,21 +185,7 @@ public class MyDroneControllerJISt extends DroneControllerSkeleton
 			return false;
 	}
 
-	private Boolean isInRange(Drone drone, Place start, Place sink, Boolean useDroneCharge)
-	{
-		double distance = DistanceCalculator.distance(
-								start.getPosition().getLatitude(),
-								start.getPosition().getLongitude(),		
-								sink.getPosition().getLatitude(),
-								sink.getPosition().getLongitude()
-								);
-
-		if (distance*drone.getDischargeRate() < drone.getCharge())
-			return true;
-		else
-			return false;
-	}
-
+	/*
 	private ArrayList<Place> getInRangePlaces(Drone drone, Place currentLocation)
 	{
 		ArrayList<Place> listOfPlaces = new ArrayList<Place>();
@@ -252,4 +199,5 @@ public class MyDroneControllerJISt extends DroneControllerSkeleton
 
 		return listOfPlaces;
 	}
+	*/
 }

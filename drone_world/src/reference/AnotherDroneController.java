@@ -22,7 +22,7 @@ import simulator.Person;
 import simulator.Place;
 import simulator.interfaces.SimulationController;
 
-public class MyDroneControllerJISt extends DroneControllerSkeleton 
+public class AnotherDroneController extends DroneControllerSkeleton 
 {
 	// @Override
 	// public String getNextDroneName()
@@ -97,8 +97,8 @@ public class MyDroneControllerJISt extends DroneControllerSkeleton
 
 		// Get the places with the most ninjas
 		ArrayList<Place> listOfNinjaPlaces = new ArrayList<Place>();
-		for (int j=0; j < listOfNearbyPlaces.size(); j++) {
-			if (listOfNearbyPlaces.get(j).getWaitingToEmbark().size() > 7)
+		for (int j=0; j < listOfPlaces.size(); j++) {
+			if (listOfPlaces.get(j).getWaitingToEmbark().size() > 7)
 				listOfNinjaPlaces.add(listOfNearbyPlaces.get(j));
 		}
 
@@ -133,32 +133,11 @@ public class MyDroneControllerJISt extends DroneControllerSkeleton
 		String routePlace = listOfNearbyPlaces.get((int)(Math.random() * listOfNearbyPlaces.size() + 1)).getName();
 
 		passPlaces.retainAll(nearbyPlaceString);
-		
-		/*
-		String theDestination = "";
-		if (listOfPeople.size() > 0)
-		{
-			Map<String, Integer> whereTheyGo = new HashMap<String, Integer>();
-			for (Person passenger : listOfPeople)
-			{
-				if (whereTheyGo.get(passenger.getDestination()) == null)
-					whereTheyGo.put(passenger.getDestination(),  1);
-				else
-					whereTheyGo.put(passenger.getDestination(), whereTheyGo.get(passenger.getDestination()) + 1);
-			}
-			
-			int theMostVotes = -1;
-			
-			for (String key : whereTheyGo.keySet())
-			{
-				if (whereTheyGo.get(key) < theMostVotes)
-				{
-					theDestination = key;
-					theMostVotes = whereTheyGo.get(key);
-				}
-			}
-		}
-		*/
+        
+        if (route.size() < 1)
+            route.addAll(routeTo(drone, x, null, new ArrayList<String>()));
+        else
+            route.removeFirst();
 
 		if (passPlaces.size() < 1)
 			getSimulator().routeDrone(drone, routePlace);
